@@ -11,14 +11,16 @@ export class AuthService {
 
   public readonly apiUrl = "https://localhost:44311/api/auth/";
 
+  token: string;
+
   constructor(
     private http: HttpClient,
     private jwtHelperService: JwtHelperService
   ) { }
 
   isUserAuthenticated() {
-    const token: string = JSON.stringify(localStorage.getItem("jwt"));
-    if (token && !this.jwtHelperService.isTokenExpired(token)) {
+    this.token = localStorage.getItem("jwt")!;
+    if (this.token && !this.jwtHelperService.isTokenExpired(this.token)) {
       return true;
     }
     else {

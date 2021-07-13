@@ -1,8 +1,8 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user';
 import { Subscription } from 'rxjs';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit, OnDestroy {
 
   invalidLogin: boolean = true;
-  user: User = { UserName: "", Password: "", Token: "" };
+  user: User = new User();
 
   sub1: Subscription = new Subscription();
 
@@ -31,12 +31,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(user: User) {
-    console.log(user);
     this.sub1 = this.authService.login(user).subscribe((response) => {
-      localStorage.setItem("jwt", response.Token);
+      console.log(response);
+      localStorage.setItem("jwt", response.token);
       this.invalidLogin = false;
       this.router.navigate(['']);
     }, err => {
+      console.log(err);
       this.invalidLogin = true;
     });
   }
