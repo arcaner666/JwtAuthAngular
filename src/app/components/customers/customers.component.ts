@@ -19,7 +19,7 @@ export class CustomersComponent implements OnInit {
   }
 
   getCustomers() {
-    this.customerService.getCustomers().subscribe((response) => {
+    this.customerService.getCustomers().subscribe((response: any) => {
       console.log(response);
       this.customers = response;
     }, err => {
