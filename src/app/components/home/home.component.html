@@ -1,0 +1,15 @@
+<h1>Ana Sayfa</h1>
+
+<br>
+<div *ngIf="isUserAuthenticated()" style="color:blue;">
+    <h2>
+        Giriş Yaptınız.
+    </h2>
+</div>
+
+<br>
+<ul>
+    <li><a [routerLink]="['customers']">Müşteriler</a></li>
+    <li *ngIf="!isUserAuthenticated()"><a [routerLink]="['login']">Giriş Yap</a></li>
+    <li *ngIf="isUserAuthenticated()"><a class="logout" (click)="logOut()">Çıkış Yap</a></li>
+</ul>

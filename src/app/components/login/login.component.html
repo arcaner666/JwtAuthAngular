@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form #LoginForm="ngForm">
+                <!-- User Name -->
+                <div class="form-group">
+                    <label for="userName">Kullanıcı Adı</label>
+                    <input class="form-control" type="text" name="userName" id="userName" #userName="ngModel"
+                        [(ngModel)]="user.UserName" required autofocus>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Şifre</label>
+                    <input class="form-control" type="password" name="password" id="password" #password="ngModel"
+                        [(ngModel)]="user.Password" required>
+                </div>
+
+                <!-- Login Button -->
+                <div class="form-group">
+                    <button class="btn btn-block btn-success" [disabled]="LoginForm.invalid" (click)="login(user)">Giriş
+                        Yap</button>
+                </div>
+
+                <!-- Warning -->
+                <div *ngIf="!invalidLogin" class="alert alert-danger">Kullanıcı adı veya şifre geçersiz!</div>
+            </form>
+        </div>
+    </div>
+</div>
