@@ -18,8 +18,17 @@ export class CustomersComponent implements OnInit {
 
   }
 
-  getCustomers() {
-    this.customerService.getCustomers().subscribe((response: any) => {
+  getCustomersForUser() {
+    this.customerService.getCustomersForUser().subscribe((response) => {
+      console.log(response);
+      this.customers = response;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  getCustomersForAdmin() {
+    this.customerService.getCustomersForAdmin().subscribe((response) => {
       console.log(response);
       this.customers = response;
     }, err => {

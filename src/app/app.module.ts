@@ -2,6 +2,7 @@ import { AuthService } from './services/auth.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -11,11 +12,6 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { FormsModule } from '@angular/forms';
 
 import { AuthGuard } from './guards/auth.guard';
-import { JwtModule } from '@auth0/angular-jwt';
-
-export function tokenGetter() {
-  return localStorage.getItem("jwt");
-}
 
 @NgModule({
   declarations: [
@@ -31,15 +27,12 @@ export function tokenGetter() {
     HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
+        tokenGetter: () => {
+          return localStorage.getItem("jwt");
+        },
         allowedDomains: [
-          "https://localhost:5000",
-          "http://localhost:5000",
-          "http://localhost:4200",
-          "https://localhost:44311",
-          "http://localhost:8309"
-        ],
-        disallowedRoutes: [],
+          "localhost:44311",
+        ]
       },
     }),
   ],

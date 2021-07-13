@@ -13,12 +13,11 @@ export class CustomerService {
     private http: HttpClient,
   ) { }
 
-  getCustomers(): Observable<string[]> {
-    let token: string = localStorage.getItem("jwt");
-    return this.http.get<string[]>(this.apiUrl, {
-      headers: new HttpHeaders(
-        { "Authorization": "Bearer " + token }
-      )
-    });
+  getCustomersForUser(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiUrl + "getcustomersforuser");
+  }
+
+  getCustomersForAdmin(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiUrl + "getcustomersforadmin");
   }
 }

@@ -1,15 +1,23 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <h1>Customers</h1>
+        <div class="col-md-12 text-center">
+            <h1>Müşteriler</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 offset-md-3">
-            <button class="btn btn-primary" (click)="getCustomers()">Müşterileri Getir</button>
-            <ul>
-                <li *ngFor="let customer of customers">{{customer}}</li>
-            </ul>
+        <div class="col-md-6 offset-md-3">
+            <button class="btn btn-primary" (click)="getCustomersForUser()">Kullanıcı İçin Getir</button>
+            <button class="btn btn-primary ml-2" (click)="getCustomersForAdmin()">Yönetici İçin Getir</button>
+            <table class="table table-striped">
+                <thead>
+                    <th>Müşteriler</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let customer of customers">
+                        <td>{{customer}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
