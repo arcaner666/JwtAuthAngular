@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,23 +10,14 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   constructor(
+    public authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
-  isUserAuthenticated() {
-    const token: string = JSON.stringify(localStorage.getItem("jwt"));
-    if (token) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
   logOut() {
-
+    localStorage.removeItem("jwt");
   }
 }

@@ -10,6 +10,11 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { FormsModule } from '@angular/forms';
 
 import { AuthGuard } from './guards/auth.guard';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -22,7 +27,14 @@ import { AuthGuard } from './guards/auth.guard';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["https://localhost:44311/"],
+        disallowedRoutes: [],
+      },
+    }),
   ],
   providers: [
     AuthGuard

@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.sub1 = this.authService.login(user).subscribe((response) => {
       localStorage.setItem("jwt", response.Token);
       this.invalidLogin = false;
-      this.router.navigate(['/']);
+      this.router.navigate(['']);
     }, err => {
       this.invalidLogin = true;
     });
