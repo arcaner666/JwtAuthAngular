@@ -6,7 +6,8 @@
     </div>
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <button class="btn btn-primary" (click)="getCustomersForUser()">Kullanıcı İçin Getir</button>
+            <button class="btn btn-primary" [routerLink]="['']">Geri</button><br>
+            <button class=" btn btn-primary" (click)="getCustomersForUser()">Kullanıcı İçin Getir</button>
             <button class="btn btn-primary ml-2" (click)="getCustomersForAdmin()">Yönetici İçin Getir</button>
             <table class="table table-striped">
                 <thead>

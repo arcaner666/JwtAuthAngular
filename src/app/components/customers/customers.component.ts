@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { CustomerService } from './../../services/customer.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,6 +12,7 @@ export class CustomersComponent implements OnInit {
   customers: string[] = [];
 
   constructor(
+    private authService: AuthService,
     public customerService: CustomerService
   ) { }
 
@@ -21,6 +23,7 @@ export class CustomersComponent implements OnInit {
   getCustomersForUser() {
     this.customerService.getCustomersForUser().subscribe((response) => {
       console.log(response);
+      this.authService.isTokenExpired();
       this.customers = response;
     }, err => {
       console.log(err);
