@@ -11,7 +11,7 @@ import { User } from 'src/app/models/user';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  invalidLogin: boolean = true;
+  invalidLogin: boolean = false;
   user: User = new User();
 
   sub1: Subscription = new Subscription();

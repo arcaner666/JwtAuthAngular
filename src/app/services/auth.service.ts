@@ -32,7 +32,7 @@ export class AuthService {
     return this.http.post<User>(this.apiUrl + "auth/login", user);
   }
 
-  refresh(user: User): Observable<User> {
-    return this.http.post<User>(this.apiUrl + "token/refresh", user);
+  refresh(user: User) {
+    return this.http.post(this.apiUrl + "token/refresh", user);
   }
 }
