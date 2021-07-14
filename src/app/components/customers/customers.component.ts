@@ -23,7 +23,6 @@ export class CustomersComponent implements OnInit {
   getCustomersForUser() {
     this.customerService.getCustomersForUser().subscribe((response) => {
       console.log(response);
-      this.authService.isTokenExpired();
       this.customers = response;
     }, err => {
       console.log(err);

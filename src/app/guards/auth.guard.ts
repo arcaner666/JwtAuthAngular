@@ -10,6 +10,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthGuard implements CanActivate {
 
+  user: User = new User();
+
   sub1: Subscription;
 
   constructor(
@@ -22,23 +24,20 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    // Token'ı yenile
-    let accessToken: string = localStorage.getItem("accessToken");
-    let refreshToken: string = localStorage.getItem("refreshToken");
     let result: boolean = false;
-    let user: User = { userName: "", password: "", accessToken: accessToken, refreshToken: refreshToken };
-    if (accessToken && refreshToken) {
-      this.sub1 = this.authService.refresh(user).subscribe((response) => {
-        console.log("Tokenlar yenilendi !!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        localStorage.setItem("accessToken", response.accessToken);
-        localStorage.setItem("refreshToken", response.refreshToken);
-        result = true;
-      }, err => {
-        console.log(err);
-        this.router.navigate(["login"]);
-        result = false;
-      });
-    }
+    this.user.accessToken = localStorage.getItem("accessToken");
+    this.user.refreshToken = localStorage.getItem("refreshToken");
+    this.sub1 = this.authService.refresh(this.user).subscribe((response) => {
+      console.log("Tokenlar yenilendi!");
+      localStorage.setItem("accessToken", response.accessToken);
+      localStorage.setItem("refreshToken", response.refreshToken);
+      result = true;
+    }, err => {
+      console.log(err);
+      this.router.navigate(["login"]);
+      result = false;
+    });
+
     console.log(result);
     return result;
   }

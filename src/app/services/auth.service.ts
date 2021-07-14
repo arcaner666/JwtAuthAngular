@@ -28,12 +28,6 @@ export class AuthService {
     }
   }
 
-  isTokenExpired() {
-    // this.accessToken = localStorage.getItem("accessToken")!;
-    // this.jwtHelperService.isTokenExpired(this.accessToken);
-    // console.log(this.jwtHelperService.decodeToken(this.accessToken));
-  }
-
   login(user: User): Observable<User> {
     return this.http.post<User>(this.apiUrl + "auth/login", user);
   }
