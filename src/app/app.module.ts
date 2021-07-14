@@ -28,7 +28,7 @@ import { AuthGuard } from './guards/auth.guard';
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
-          return localStorage.getItem("jwt");
+          return localStorage.getItem("accessToken");
         },
         allowedDomains: [
           "localhost:44311",

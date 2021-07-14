@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -8,18 +9,20 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthGuard implements CanActivate {
 
   constructor(
-    private jwtHelperService: JwtHelperService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
   canActivate() {
-    const token = localStorage.getItem("jwt");
-    if (token && !this.jwtHelperService.isTokenExpired(token)) {
-      console.log(this.jwtHelperService.decodeToken(token));
+    if (this.authService.isUserAuthenticated()) {
       return true;
     }
+
+    if (this.authService.isRefreshSuccess()) {
+      return true;
+    }
+
     this.router.navigate(["login"]);
     return false;
   }
-
 }

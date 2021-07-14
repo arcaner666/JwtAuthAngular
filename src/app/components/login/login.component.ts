@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   login(user: User) {
     this.sub1 = this.authService.login(user).subscribe((response) => {
       console.log(response);
-      localStorage.setItem("jwt", response.token);
+      localStorage.setItem("accessToken", response.accessToken);
+      localStorage.setItem("refreshToken", response.refreshToken);
       this.invalidLogin = false;
       this.router.navigate(['']);
     }, err => {
